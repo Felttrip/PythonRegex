@@ -1,28 +1,52 @@
 import sys
+import pprint
 from pattern import Pattern
 def main():
-    regex = build_regex("abbd*e")
-    print match(regex,  "abbdddddddeasdijfjk")
+    regex = build_regex("attttb")
+    print match(regex,  "attttb")
+
 
 def match(re, string):
     """
     :type re: State
     """
-
     states = [re]
-    new_states = []
+    if can_match_empty_string(states):
+        return True
     for char in string:
-        for state in states:
-            for transition in state.transitions:
-                if transition.char == char or transition.char is None:
-                    if transition.next_state.stateType == "match":
-                        return True
-                    new_states.append(transition.next_state)
-            if state.stateType != "start":
-                states.remove(state)
-        states.extend(new_states)
-        new_states = []
+        states = expand_states(states, char)
+        states = advance_none_states(states)
+        for s in states:
+            if s.stateType == "match":
+                return True
     return False
+
+def can_match_empty_string(states):
+    states = advance_none_states(states)
+    for s in states:
+            if s.stateType == "match":
+                return True
+    return False
+def expand_states(active_states, char):
+    new_states = []
+    start_state = None
+    for state in active_states:
+        for t in state.transitions:
+            if t.char == char or t.char == "any":
+                new_states.append(t.next_state)
+        if state.stateType == "start":
+            start_state = state
+    active_states = [start_state]
+    active_states.extend(new_states)
+    return active_states
+
+
+def advance_none_states(states):
+    for state in states:
+        for transition in state.transitions:
+            if transition.char is None:
+                states.append(transition.next_state)
+    return states
 
 
 def build_regex(reString):
@@ -43,7 +67,7 @@ def add_transition(re, states):
     if char == ".":
         for current in states:
             state = State("inner", None, current)
-            transition = Transition(None, state)
+            transition = Transition("any", state)
             current.add_transition(transition)
             return_states.append(state)
     elif char == "*":

@@ -25,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/regex.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+              <caret line="97" column="37" selection-start-line="97" selection-start-column="37" selection-end-line="97" selection-end-column="37" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -36,8 +36,8 @@
       <file leaf-file-name="test_regex.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test_regex.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70731705">
-              <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.6585366">
+              <caret line="126" column="17" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="17" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -131,7 +131,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Unittest TestRegex.test_match_complicated">
+  <component name="RunManager" selected="Python tests.Unittests in test_regex">
     <configuration default="false" name="Unittests in test_regex" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -154,7 +154,7 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unittest TestRegex.test_match_zero_or_more_end" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Unittest TestRegex.test_exception" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -166,7 +166,7 @@
       <module name="BetterExpressions" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_regex.py" />
       <option name="CLASS_NAME" value="TestRegex" />
-      <option name="METHOD_NAME" value="test_match_zero_or_more_end" />
+      <option name="METHOD_NAME" value="test_exception" />
       <option name="FOLDER_NAME" value="" />
       <option name="TEST_TYPE" value="TEST_METHOD" />
       <option name="PATTERN" value="" />
@@ -176,7 +176,7 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unittest TestRegex.test_match_zero_or_more_matches_empty" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Unittest TestRegex.test_one_or_more" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -188,7 +188,7 @@
       <module name="BetterExpressions" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_regex.py" />
       <option name="CLASS_NAME" value="TestRegex" />
-      <option name="METHOD_NAME" value="test_match_zero_or_more_matches_empty" />
+      <option name="METHOD_NAME" value="test_one_or_more" />
       <option name="FOLDER_NAME" value="" />
       <option name="TEST_TYPE" value="TEST_METHOD" />
       <option name="PATTERN" value="" />
@@ -198,7 +198,7 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unittest TestRegex.test_escaped_chars" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Unittest TestRegex.test_one_or_more4" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -210,7 +210,7 @@
       <module name="BetterExpressions" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_regex.py" />
       <option name="CLASS_NAME" value="TestRegex" />
-      <option name="METHOD_NAME" value="test_escaped_chars" />
+      <option name="METHOD_NAME" value="test_one_or_more4" />
       <option name="FOLDER_NAME" value="" />
       <option name="TEST_TYPE" value="TEST_METHOD" />
       <option name="PATTERN" value="" />
@@ -220,7 +220,7 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unittest TestRegex.test_match_complicated" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Unittest TestRegex.test_one_or_more_exception" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -232,7 +232,7 @@
       <module name="BetterExpressions" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_regex.py" />
       <option name="CLASS_NAME" value="TestRegex" />
-      <option name="METHOD_NAME" value="test_match_complicated" />
+      <option name="METHOD_NAME" value="test_one_or_more_exception" />
       <option name="FOLDER_NAME" value="" />
       <option name="TEST_TYPE" value="TEST_METHOD" />
       <option name="PATTERN" value="" />
@@ -366,18 +366,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test_regex" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_match_zero_or_more_end" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_match_zero_or_more_matches_empty" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_escaped_chars" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_match_complicated" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_exception" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_one_or_more" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_one_or_more4" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_one_or_more_exception" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_match_complicated" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_escaped_chars" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in test_regex" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_match_zero_or_more_matches_empty" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_match_zero_or_more_end" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test_regex" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_one_or_more_exception" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_one_or_more4" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_one_or_more" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TestRegex.test_exception" />
       </list>
     </recent_temporary>
   </component>
@@ -484,7 +484,7 @@
     <entry file="file://$PROJECT_DIR$/regex.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+          <caret line="97" column="37" selection-start-line="97" selection-start-column="37" selection-end-line="97" selection-end-column="37" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
@@ -493,8 +493,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test_regex.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70731705">
-          <caret line="91" column="0" selection-start-line="91" selection-start-column="0" selection-end-line="91" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.6585366">
+          <caret line="126" column="17" selection-start-line="126" selection-start-column="17" selection-end-line="126" selection-end-column="17" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

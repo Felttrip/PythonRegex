@@ -84,11 +84,22 @@ def add_transition(re, states):
     elif char == "*":
         for current in states:
             last_state = current.last_state
-            if len(last_state.transitions) > 1:
+            if last_state is None or len(last_state.transitions) > 1:
                 raise SyntaxError("Invalid Token " + char)
             char_to_match = last_state.transitions[0].char
             last_state.transitions = []
             zero_transition = Transition(None, current)
+            same_transition = Transition(char_to_match, last_state)
+            last_state.add_multiple_transitions([zero_transition, same_transition])
+            return_states.append(current)
+    elif char == "+":
+        for current in states:
+            last_state = current.last_state
+            if last_state is None or len(last_state.transitions) > 1:
+                raise SyntaxError("Invalid Token " + char)
+            char_to_match = last_state.transitions[0].char
+            last_state.transitions = []
+            zero_transition = Transition(char_to_match, current)
             same_transition = Transition(char_to_match, last_state)
             last_state.add_multiple_transitions([zero_transition, same_transition])
             return_states.append(current)

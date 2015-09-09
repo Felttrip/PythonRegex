@@ -94,3 +94,37 @@ class TestRegex(unittest.TestCase):
         p = regex.build_regex("\*\.")
         result = regex.match(p, "*.")
         self.assertTrue(result)
+
+    def test_exception(self):
+        try:
+            p = regex.build_regex("**.")
+            self.assertTrue(False)
+        except SyntaxError:
+            self.assertTrue(True)
+
+    def test_one_or_more(self):
+        p = regex.build_regex("a+")
+        result = regex.match(p, "a")
+        self.assertTrue(result)
+
+    def test_one_or_more1(self):
+        p = regex.build_regex("a+")
+        result = regex.match(p, "aaaa")
+        self.assertTrue(result)
+
+    def test_one_or_more2(self):
+        p = regex.build_regex("a+")
+        result = regex.match(p, "bab")
+        self.assertTrue(result)
+
+    def test_one_or_more3(self):
+        p = regex.build_regex("a+")
+        result = regex.match(p, "b")
+        self.assertFalse(result)
+
+    def test_one_or_more_exception(self):
+        try:
+            p = regex.build_regex("+")
+            self.assertTrue(False)
+        except SyntaxError:
+            self.assertTrue(True)

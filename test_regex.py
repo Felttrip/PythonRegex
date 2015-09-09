@@ -89,3 +89,8 @@ class TestRegex(unittest.TestCase):
         p = regex.build_regex("a .og was* wa*lking down .h. stre*t")
         result = regex.match(p, "a dog was walking down the street")
         self.assertTrue(result)
+
+    def test_escaped_chars(self):
+        p = regex.build_regex("\*\.")
+        result = regex.match(p, "*.")
+        self.assertTrue(result)

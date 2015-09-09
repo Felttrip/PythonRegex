@@ -21,12 +21,15 @@ def match(re, string):
                 return True
     return False
 
+
 def can_match_empty_string(states):
     states = advance_none_states(states)
     for s in states:
             if s.stateType == "match":
                 return True
     return False
+
+
 def expand_states(active_states, char):
     new_states = []
     start_state = None
@@ -64,7 +67,15 @@ def build_regex(reString):
 def add_transition(re, states):
     char = re.get_current_token()
     return_states = []
-    if char == ".":
+    if char == "\\":
+        re.index += 1
+        char = re.get_current_token()
+        for current in states:
+            state = State("inner", None, current)
+            transition = Transition(char, state)
+            current.add_transition(transition)
+            return_states.append(state)
+    elif char == ".":
         for current in states:
             state = State("inner", None, current)
             transition = Transition("any", state)

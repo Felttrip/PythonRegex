@@ -190,5 +190,19 @@ class TestRegex(unittest.TestCase):
         result = regex.match(p, "abhfg")
         self.assertTrue(result)
 
+    def test_zero_or_one(self):
+        p = regex.build_regex("ba?")
+        result = regex.match(p, "ba")
+        self.assertTrue(result)
+        result = regex.match(p, "b")
+        self.assertTrue(result)
+        result = regex.match(p, "aa")
+        self.assertFalse(result)
+
+    def test_zero_or_one_with_many(self):
+        p = regex.build_regex("h[abc]?d")
+        result = regex.match(p, "had")
+        self.assertTrue(result)
+
 if __name__ == '__main__':
     unittest.main()

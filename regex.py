@@ -136,6 +136,12 @@ def add_transition(re, states):
                     new_transitions.append(same_transition)
             last_state.add_multiple_transitions(new_transitions)
             return_states.append(current)
+    elif char == "?":
+        for current in states:
+            last_state = current.last_state
+            skip_char_transition = Transition(None, current)
+            last_state.add_transition(skip_char_transition)
+            return_states.append(current)
     elif char == "!":
         re.index += 1
         char = re.get_current_token()

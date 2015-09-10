@@ -1,9 +1,18 @@
+#!/usr/bin/python
+
 import sys
-import pprint
 from pattern import Pattern
+from transition import Transition
+from state import State
+
+
 def main():
-    regex = build_regex("attttb")
-    print match(regex,  "attttb")
+    if len(sys.argv) < 3:
+        print "Usage regex.py <regular expression> <string>"
+        sys.exit(0)
+    p = build_regex(sys.argv[1])
+    result = match(p, sys.argv[2])
+    print result
 
 
 def match(re, string):
@@ -35,7 +44,7 @@ def expand_states(active_states, char):
     start_state = None
     for state in active_states:
         for t in state.transitions:
-            if t.char == char or t.char == "any":
+            if (t.match is True and t.char == char) or t.char == "any" or (t.match is False and t.char != char):
                 new_states.append(t.next_state)
         if state.stateType == "start":
             start_state = state
@@ -54,7 +63,6 @@ def advance_none_states(states):
 
 def build_regex(reString):
     re = Pattern(reString, 0)
-
     start = State("start", None, None)
     states = [start]
     while len(re.string) > re.index:
@@ -75,6 +83,25 @@ def add_transition(re, states):
             transition = Transition(char, state)
             current.add_transition(transition)
             return_states.append(state)
+    elif char == "[":
+        set_of_chars = []
+        re.index += 1
+        current_char = re.get_current_token()
+        m = True
+        if current_char == "^":
+            m = False
+            re.index += 1
+            current_char = re.get_current_token()
+        while current_char != "]":
+            set_of_chars.append(current_char)
+            re.index += 1
+            current_char = re.get_current_token()
+        for current in states:
+            state = State("inner", None, current)
+            for new_char in set_of_chars:
+                transition = Transition(new_char, state, m)
+                current.add_transition(transition)
+                return_states.append(state)
     elif char == ".":
         for current in states:
             state = State("inner", None, current)
@@ -84,25 +111,39 @@ def add_transition(re, states):
     elif char == "*":
         for current in states:
             last_state = current.last_state
-            if last_state is None or len(last_state.transitions) > 1:
+            if last_state is None:
                 raise SyntaxError("Invalid Token " + char)
-            char_to_match = last_state.transitions[0].char
+            last_state_transitions = last_state.transitions
             last_state.transitions = []
             zero_transition = Transition(None, current)
-            same_transition = Transition(char_to_match, last_state)
-            last_state.add_multiple_transitions([zero_transition, same_transition])
+            last_state.add_transition(zero_transition)
+            for transition in last_state_transitions:
+                if transition.char is not None:
+                    char_to_match = transition.char
+                    same_transition = Transition(char_to_match, last_state)
+                    last_state.add_transition(same_transition)
+
             return_states.append(current)
     elif char == "+":
         for current in states:
             last_state = current.last_state
-            if last_state is None or len(last_state.transitions) > 1:
+            if last_state is None:
                 raise SyntaxError("Invalid Token " + char)
-            char_to_match = last_state.transitions[0].char
-            last_state.transitions = []
-            zero_transition = Transition(char_to_match, current)
-            same_transition = Transition(char_to_match, last_state)
-            last_state.add_multiple_transitions([zero_transition, same_transition])
+            new_transitions = []
+            for transition in last_state.transitions:
+                    char_to_match = transition.char
+                    same_transition = Transition(char_to_match, last_state)
+                    new_transitions.append(same_transition)
+            last_state.add_multiple_transitions(new_transitions)
             return_states.append(current)
+    elif char == "!":
+        re.index += 1
+        char = re.get_current_token()
+        for current in states:
+            state = State("inner", None, current)
+            transition = Transition(char, state, False)
+            current.add_transition(transition)
+            return_states.append(state)
     else:
         for current in states:
             state = State("inner", None, current)
@@ -111,37 +152,6 @@ def add_transition(re, states):
             return_states.append(state)
     re.index += 1
     return return_states
-
-
-class State:
-    """
-    :type transitions: list(transition)
-    """
-
-    def __init__(self, state_type, transitions, last_state):
-        self.stateType = state_type
-        self.last_state = last_state
-        if transitions:
-            self.transitions = transitions
-        else:
-            self.transitions = []
-
-    def add_transition(self, next_transition):
-        self.transitions.append(next_transition)
-
-    def add_multiple_transitions(self, next_transitions):
-        self.transitions.extend(next_transitions)
-
-
-class Transition:
-    """
-    :type next_state: State
-    """
-
-    def __init__(self, char, next_state):
-        self.char = char
-        self.next_state = next_state
-
 
 if __name__ == '__main__':
     main()

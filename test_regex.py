@@ -128,3 +128,67 @@ class TestRegex(unittest.TestCase):
             self.assertTrue(False)
         except SyntaxError:
             self.assertTrue(True)
+
+    def test_match_many(self):
+        p = regex.build_regex("ab[cde]fg")
+        result = regex.match(p, "abcfg")
+        self.assertTrue(result)
+        result = regex.match(p, "abdfg")
+        self.assertTrue(result)
+        result = regex.match(p, "abefg")
+        self.assertTrue(result)
+        result = regex.match(p, "abfg")
+        self.assertFalse(result)
+
+    def test_multi_many(self):
+        p = regex.build_regex("ab[cd]*e")
+        result = regex.match(p, "abcddcdccdce")
+        self.assertTrue(result)
+
+    def test_multi_many1(self):
+        p = regex.build_regex("[cd]*")
+        result = regex.match(p, "cddcdccdce")
+        self.assertTrue(result)
+
+    def test_multi_many2(self):
+        p = regex.build_regex(".[cd]*.f")
+        result = regex.match(p, "cddcdccdcef")
+        self.assertTrue(result)
+
+    def test_multi_many3(self):
+        p = regex.build_regex(".[cd]+.f")
+        result = regex.match(p, "cddcdccdchef")
+        self.assertFalse(result)
+
+    def test_multi_many4(self):
+        p = regex.build_regex(".[cd]+.f")
+        result = regex.match(p, "cddcdccdchf")
+        self.assertTrue(result)
+
+    def test_multi_many5(self):
+        p = regex.build_regex(".+")
+        result = regex.match(p, "aaasdf")
+        self.assertTrue(result)
+
+    def test_dont_match(self):
+        p = regex.build_regex("ab!cdef")
+        result = regex.match(p, "abqdef")
+        self.assertTrue(result)
+
+    def test_dont_match1(self):
+        p = regex.build_regex("ab!cdef")
+        result = regex.match(p, "abcdef")
+        self.assertFalse(result)
+
+    def test_dont_match_any(self):
+        p = regex.build_regex("ab[^cde]fg")
+        result = regex.match(p, "abcdefg")
+        self.assertFalse(result)
+
+    def test_dont_match_any1(self):
+        p = regex.build_regex("ab[^cde]fg")
+        result = regex.match(p, "abhfg")
+        self.assertTrue(result)
+
+if __name__ == '__main__':
+    unittest.main()

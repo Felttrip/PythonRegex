@@ -20,13 +20,19 @@ def match(re, string):
     :type re: State
     """
     states = [re]
+    matchstr = ""
     if can_match_empty_string(states):
         return True
     for char in string:
         states = expand_states(states, char)
         states = advance_none_states(states)
+        if(len(states)>1):
+            matchstr += char
+        else:
+            matchstr = ""
         for s in states:
             if s.stateType == "match":
+                print matchstr
                 return True
     return False
 
